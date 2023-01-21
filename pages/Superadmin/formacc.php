@@ -108,7 +108,7 @@ if (isset($_POST['tolak'])) {
                     <tr>
                         <td><?php echo "$i"; ?></td>
                         <?php echo "<td>";
-    echo "<select name = " . $varSupir . ">";
+    echo "<select name = " . $varSupir . " required>";
     for ($j = 0; $j < $detSupir->rowCount(); $j++) {
         $count = 0;
 
@@ -123,7 +123,7 @@ if (isset($_POST['tolak'])) {
         }
 
         if ($count == 0) {
-            echo "<option value='" . $dataSupir[$j]['id_supir'] . "'>" . $dataSupir[$j]['nama_supir'] . "</option>";
+            echo "<option value='" . $dataSupir[$j]['id_supir'] . "' >" . $dataSupir[$j]['nama_supir'] . "</option>";
         }
 
     }
