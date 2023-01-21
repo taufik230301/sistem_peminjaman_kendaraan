@@ -4,6 +4,39 @@ session_start();
 if (!isset($_SESSION['user_session'])){
     header('Location:../Users/loginpage.php');
     }
+
+    if(isset($_POST['kirim']))
+  {
+    $id_kendaraan=$_GET['idkendaraan'];
+    $tanggal_servis=$_POST['tanggal_servis'];
+    $keterangan=$_POST['keterangan'];
+              
+                if(!isset($errMSG))
+                {
+                        $stmt = $DB_con->prepare("INSERT INTO servis_kendaraan (id_servis, id_kendaraan, tanggal_servis, keterangan, ket) VALUES (NULL, :id_kendaraan, :tanggal_servis, :keterangan, 'active')");
+                        $stmt->bindParam(':id_kendaraan',$id_kendaraan);
+                        $stmt->bindParam(':tanggal_servis',$tanggal_servis);
+                        $stmt->bindParam(':keterangan',$keterangan);
+                       
+                        if($stmt->execute())
+                          {
+                            echo "
+                            <div class='alert alert-success fade in'>
+                                <a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+                                Silahkan click kembali!
+                            </div> ";
+                                }else{
+                                    echo "
+                            <div class='alert alert-success fade in'>
+                                <a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+                                Silahkan click kembali!
+                            </div> ";
+                                }
+                   
+                      
+                    }
+                  
+    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -162,11 +195,15 @@ if (!isset($_SESSION['user_session'])){
             
           }
     }else if($_GET['page']=="kendaraan"){
-        if (empty($_GET['rowidkendaraan'])) {
-          include "../Superadmin/tablekendaraan.php";
+      if (empty($_GET['rowidkendaraan'])) {
+        if (isset($_GET['tambahservis'])) {
+          include "formisiservis.php";
         }else{
-          include "../Superadmin/formdetailkendaraan.php";
+          include "../SuperAdmin/tablekendaraan.php";
         }
+      }else{
+          include "formdetailkendaraan.php";
+      }
           
     }else if($_GET['page']=="user"){
           include "../Superadmin/tableuser.php";
