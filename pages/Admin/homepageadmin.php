@@ -1,42 +1,7 @@
 <?php
 include "../../asset/database/koneksi.php";
 session_start();
-if (!isset($_SESSION['user_session'])){
-    header('Location:../Users/loginpage.php');
-    }
 
-    if(isset($_POST['kirim']))
-  {
-    $id_kendaraan=$_GET['idkendaraan'];
-    $tanggal_servis=$_POST['tanggal_servis'];
-    $keterangan=$_POST['keterangan'];
-              
-                if(!isset($errMSG))
-                {
-                        $stmt = $DB_con->prepare("INSERT INTO servis_kendaraan (id_servis, id_kendaraan, tanggal_servis, keterangan, ket) VALUES (NULL, :id_kendaraan, :tanggal_servis, :keterangan, 'active')");
-                        $stmt->bindParam(':id_kendaraan',$id_kendaraan);
-                        $stmt->bindParam(':tanggal_servis',$tanggal_servis);
-                        $stmt->bindParam(':keterangan',$keterangan);
-                       
-                        if($stmt->execute())
-                          {
-                            echo "
-                            <div class='alert alert-success fade in'>
-                                <a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-                                Silahkan click kembali!
-                            </div> ";
-                                }else{
-                                    echo "
-                            <div class='alert alert-success fade in'>
-                                <a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
-                                Silahkan click kembali!
-                            </div> ";
-                                }
-                   
-                      
-                    }
-                  
-    }
 ?>
 <!DOCTYPE html>
 <html>
@@ -61,7 +26,8 @@ if (!isset($_SESSION['user_session'])){
 
     <!-- Header Navbar: style can be found in header.less -->
   <?php
-    include ('navbaradmin.php') 
+    include ('navbaradmin.php') ;
+    
   ?>
   </header>
   <!-- Left side column. contains the logo and sidebar -->
@@ -144,6 +110,43 @@ if (!isset($_SESSION['user_session'])){
   <!-- Content Wrapper. Contains page content -->
 
   <div class="content-wrapper">
+    <?php
+    if (!isset($_SESSION['user_session'])){
+      header('Location:../Users/loginpage.php');
+      }
+  
+      if(isset($_POST['kirim']))
+    {
+      $id_kendaraan=$_GET['idkendaraan'];
+      $tanggal_servis=$_POST['tanggal_servis'];
+      $keterangan=$_POST['keterangan'];
+                
+                  if(!isset($errMSG))
+                  {
+                          $stmt = $DB_con->prepare("INSERT INTO servis_kendaraan (id_servis, id_kendaraan, tanggal_servis, keterangan, ket) VALUES (NULL, :id_kendaraan, :tanggal_servis, :keterangan, 'active')");
+                          $stmt->bindParam(':id_kendaraan',$id_kendaraan);
+                          $stmt->bindParam(':tanggal_servis',$tanggal_servis);
+                          $stmt->bindParam(':keterangan',$keterangan);
+                         
+                          if($stmt->execute())
+                            {
+                              echo "
+                              <div class='alert alert-success fade in'>
+                                  <a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+                                  Silahkan click kembali!
+                              </div> ";
+                                  }else{
+                                      echo "
+                              <div class='alert alert-success fade in'>
+                                  <a href='#'' class='close' data-dismiss='alert' aria-label='close'>&times;</a>
+                                  Silahkan click kembali!
+                              </div> ";
+                                  }
+                     
+                        
+                      }
+                    
+      }?>
     <!-- Content Header (Page header) -->
     <section class="content-header">
       <h1>
@@ -152,7 +155,17 @@ if (!isset($_SESSION['user_session'])){
       </h1>
       <ol class="breadcrumb">
       <li>
-       <?php if(empty($_GET['page']) || $_GET['page']=="home"){
+       
+      </li>
+      </ol>
+    </section>
+    <br>
+    <!-- Main content -->
+    <section class="content">
+      <!-- Info boxes -->
+      <div class="row">
+        <div class="col-md-12 col-sm-6 col-xs-12">
+        <?php if(empty($_GET['page']) || $_GET['page']=="home"){
           echo " 
  
         <form method='post' enctype='multipart/form-data' class='form-inline'>
@@ -172,16 +185,8 @@ if (!isset($_SESSION['user_session'])){
       }else{
         echo "";
       }
+      
       ?>
-      </li>
-      </ol>
-    </section>
-    <br>
-    <!-- Main content -->
-    <section class="content">
-      <!-- Info boxes -->
-      <div class="row">
-        <div class="col-md-12 col-sm-6 col-xs-12">
     <?php
     if(empty($_GET['page']) || $_GET['page']=="home"){
           if (empty($_GET['rowidpermintaan'])) {
