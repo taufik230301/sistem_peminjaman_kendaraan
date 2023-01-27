@@ -5,7 +5,7 @@
                     }elseif ($_GET['page']=="user") {
                         echo "<button class='btn btn-primary' href='javascript:void(0);'' id='jwpopupLink'><span class='fa  fa-user-plus'>&nbspTambah User</span></button>";
                     }elseif ($_GET['page']=="admin") {
-                        echo "<button class='btn btn-primary' href='javascript:void(0);'' id='jwpopupLink'><span class='fa  fa-user-plus'>&nbspTambah Admin</span></button>";
+                        echo "<button class='btn btn-primary' href='javascript:void(0);'' id='jwpopupLink'><span class='fa  fa-user-plus'>&nbspTambah Kassubag</span></button>";
                     }elseif ($_GET['page']=="supir") {
                         echo "<button class='btn btn-primary' href='javascript:void(0);'' id='jwpopupLink'><span class='fa  fa-user-plus'>&nbspTambah Supir</span></button>";
                     }

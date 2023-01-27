@@ -40,7 +40,7 @@ session_start();
           <img src="../../asset/pict/logosatpol.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Admin</p>
+          <p>Kassubag</p>
           <a href="#">Sistem Peminjaman Kendaraan</a>
         </div>
       </div>

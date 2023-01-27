@@ -20,7 +20,7 @@
 
                 <p>
                   <?php echo $_SESSION['nama'] ?>
-                  <small>Admin Utama APMD</small>
+                  <small>Sekertaris APMD</small>
                 </p>
               </li>
               <!-- Menu Body -->

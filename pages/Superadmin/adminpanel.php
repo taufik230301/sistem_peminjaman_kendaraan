@@ -43,7 +43,7 @@ if (!isset($_SESSION['user_session'])){
           <img src="../../asset/pict/logosatpol.png" class="img-circle" alt="User Image">
         </div>
         <div class="pull-left info">
-          <p>Admin Utama</p>
+          <p>Sekertaris</p>
           <a href="#">Aplikasi Peminjaman Mobil</a>
         </div>
       </div>
@@ -82,7 +82,7 @@ if (!isset($_SESSION['user_session'])){
           echo "";
     }    ?> treeview">
           <a href="?page=admin">
-            <i class="fa fa-user-secret"></i> <span>Admin</span>
+            <i class="fa fa-user-secret"></i> <span>Kassubag</span>
           </a>
         </li>
         <li class="<?php if($_GET['page']=="user"){
