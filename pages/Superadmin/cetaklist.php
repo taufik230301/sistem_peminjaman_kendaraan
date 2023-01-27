@@ -22,18 +22,30 @@
             <?php
                     $dari = $_GET['dari_peminjaman'];
                     $sampai = $_GET['sampai_peminjaman'];
-                    $stmt = $DB_con->prepare("SELECT * from user RIGHT JOIN peminjaman ON user.id_pengguna=peminjaman.id_peminjam");
+
+
+                    $stmt = $DB_con->prepare("SELECT * from user RIGHT JOIN peminjaman ON user.id_pengguna=peminjaman.id_peminjam WHERE peminjaman.waktu_pinjam BETWEEN  '$dari' AND '$sampai'");
+
                     $stmt->execute();
+                   
                      while($hasil = $stmt->fetch()){
-                        if (!empty($_POST['dari_peminjaman']) && !empty($_POST['sampai_peminjaman'])) {
+                        if (!empty($_GET['dari_peminjaman']) && !empty($_GET['sampai_peminjaman'])) {
+                          
                             if ($dari <= $hasil['waktu_pinjam'] && $hasil['waktu_pinjam']<=$sampai) {
                             $id_peminjaman = $hasil['id_peminjaman'];
+                           
+                            $stmtlist = $DB_con->prepare("SELECT * from plot_kendaraan LEFT JOIN kendaraan ON plot_kendaraan.id_kendaraan=kendaraan.id_kendaraan LEFT JOIN supir ON plot_kendaraan.id_supir=supir.id_supir LEFT JOIN peminjaman ON plot_kendaraan.id_peminjaman=peminjaman.id_peminjaman WHERE plot_kendaraan.id_peminjaman= $id_peminjaman AND peminjaman.status_peminjaman <> 'Canceled'");
+                        }else{
+                            $id_peminjaman = $hasil['id_peminjaman'];
+                           
                             $stmtlist = $DB_con->prepare("SELECT * from plot_kendaraan LEFT JOIN kendaraan ON plot_kendaraan.id_kendaraan=kendaraan.id_kendaraan LEFT JOIN supir ON plot_kendaraan.id_supir=supir.id_supir LEFT JOIN peminjaman ON plot_kendaraan.id_peminjaman=peminjaman.id_peminjaman WHERE plot_kendaraan.id_peminjaman= $id_peminjaman AND peminjaman.status_peminjaman <> 'Canceled'");
                         }
                         }else{
+                          
                             $id_peminjaman = $hasil['id_peminjaman'];
                             $stmtlist = $DB_con->prepare("SELECT * from plot_kendaraan LEFT JOIN kendaraan ON plot_kendaraan.id_kendaraan=kendaraan.id_kendaraan LEFT JOIN supir ON plot_kendaraan.id_supir=supir.id_supir LEFT JOIN peminjaman ON plot_kendaraan.id_peminjaman=peminjaman.id_peminjaman WHERE plot_kendaraan.id_peminjaman= $id_peminjaman AND peminjaman.status_peminjaman <> 'Canceled'");
                         }
+                      
                         
                         $stmtlist->execute();
                         $datalist = $stmtlist->fetchall();
